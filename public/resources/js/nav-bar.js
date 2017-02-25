@@ -12,6 +12,8 @@ var NavBar = function () {
         this.screens = $('.screen');
         this.navButtons = $('.nav-bar-item');
         this.setUpListeners();
+
+        this.currentPage = null;
         this.setCurrentPage({ animated: false });
     }
 
@@ -38,28 +40,88 @@ var NavBar = function () {
                 page = '#home';
             }
             this.moveElementIntoView({ element: $(page), animated: pObject.animated });
+            this.currentPage = $(page);
         }
     }, {
         key: 'moveElementIntoView',
         value: function moveElementIntoView() {
+            var _this2 = this;
+
             var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { element: null, animated: true, callback: function callback() {} };
 
+            if (pObject.element === null) {
+                return;
+            }
+
             var animationTime = pObject.animated ? 800 : 0;
+            var windowTop = $(window).scrollTop();
+            var windowLeft = $(window).scrollLeft();
             var top = $(pObject.element).offset().top;
             var left = $(pObject.element).offset().left;
-            // Using jQuery's animate() method to add smooth page scroll
-            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-            $('#content, body').animate({
-                scrollTop: top,
-                scrollLeft: left
-            }, animationTime, function () {
+
+            var completion = function completion() {
                 // Add hash (#) to URL when done scrolling (default click behavior)
                 window.location.hash = $(pObject.element).attr('id') ? '#' + $(pObject.element).attr('id') : '';
+                _this2.currentPage = $(window.location.hash);
                 // Call the callback function
                 if (typeof pObject.callback === 'function') {
                     pObject.callback();
                 }
-            });
+            };
+
+            //get the number of pages on the current content row
+            var container = $(this.currentPage).closest('.content-row');
+            var numPages = $(container).find('.screen').length;
+
+            //get the number of pages on the next content row
+            container = $(pObject.element).closest('.content-row');
+            var numNextPages = $(container).find('.screen').length;
+
+            this.scrollToPos({ duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages });
+        }
+    }, {
+        key: 'scrollToPos',
+        value: function scrollToPos() {
+            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { duration: 0, left: 0, right: 0, verticalFirst: true, callback: function callback() {} };
+
+            var windowTop = $(window).scrollTop();
+            var windowLeft = $(window).scrollLeft();
+            var topChange = windowTop !== pObject.top;
+            var leftChange = windowLeft !== pObject.left;
+            var scroller = '#content, body';
+
+            //if our current position is diagonal from the destination
+            //  we want the animation to still be the same length (even though there are two animations)
+            //  so we cut the animation time for both animations in half
+            if (topChange && leftChange) {
+                pObject.duration = pObject.duration / 2;
+            }
+
+            if (pObject.verticalFirst) {
+                $(scroller).animate({
+                    scrollTop: pObject.top
+                }, topChange ? pObject.duration : 0, function () {
+                    $(scroller).animate({
+                        scrollLeft: pObject.left
+                    }, leftChange ? pObject.duration : 0, function () {
+                        if (typeof pObject.callback === 'function') {
+                            pObject.callback();
+                        }
+                    });
+                });
+            } else {
+                $(scroller).animate({
+                    scrollLeft: pObject.left
+                }, leftChange ? pObject.duration : 0, function () {
+                    $(scroller).animate({
+                        scrollTop: pObject.top
+                    }, topChange ? pObject.duration : 0, function () {
+                        if (typeof pObject.callback === 'function') {
+                            pObject.callback();
+                        }
+                    });
+                });
+            }
         }
     }, {
         key: 'handleNavigate',
@@ -68,11 +130,8 @@ var NavBar = function () {
             if (event.target.hash !== "") {
                 // Prevent default anchor click behavior
                 event.preventDefault();
-
-                // Store hash
-                var hash = event.target.hash;
-
-                this.moveElementIntoView({ element: hash, animated: true });
+                // Move that page into view
+                this.moveElementIntoView({ element: event.target.hash, animated: true });
             }
         }
     }]);

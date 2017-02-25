@@ -14,19 +14,25 @@
     <div id="content">
             <script type="text/javascript">requirejs(["./resources/js/nav-bar.js"], function(){ })</script>
       <div class="nav-bar">
-        <div class="nav-bar-content"><a class="nav-bar-item" id="nav-item-left">left</a><a class="nav-bar-item" id="nav-item-right" href="#about">right</a><a class="nav-bar-item" id="nav-item-top">top</a><a class="nav-bar-item" id="nav-item-bottom">bottom</a></div>
+        <div class="nav-bar-content"><a class="nav-bar-item" id="nav-item-left" href="#examples">left</a><a class="nav-bar-item" id="nav-item-right" href="#about">right</a><a class="nav-bar-item" id="nav-item-top" href="#contact">top</a><a class="nav-bar-item" id="nav-item-bottom">bottom</a></div>
       </div>
-      <div class="parallax-container screen" id="home">
-        <div class="home-content-container parallax-element">
-          <h1 class="home-title-1">cadence</h1>
-        </div>
-        <div class="home-background-content">
-          <div class="home-background-content-darken"></div>
-          <div class="home-foreground"></div>
-          <div class="home-background"></div>
-        </div>
+      <div class="content-row">
+        <div class="screen" id="contact"></div>
       </div>
-      <div class="screen" id="about"></div>
+      <div class="content-row">
+        <div class="screen" id="examples" title="Examples"></div>
+        <div class="parallax-container screen" id="home" title="Home">
+          <div class="home-content-container parallax-element">
+            <h1 class="home-title-1">cadence</h1>
+          </div>
+          <div class="home-background-content">
+            <div class="home-background-content-darken"></div>
+            <div class="home-foreground"></div>
+            <div class="home-background"></div>
+          </div>
+        </div>
+        <div class="screen" id="about" title="About"></div>
+      </div>
     </div>
   </body>
 </html>

@@ -16,26 +16,27 @@ $nav-margin: 15px;
             position: absolute;
             font-size: 2em;
             letter-spacing: 0.3em;
+            text-decoration: none;
 
-            &.nav-item-left{
+            &#nav-item-left{
                 transform: rotate(-90deg) translateY(-50%);
                 top: 50%;
                 left: $nav-margin;
             }
 
-            &.nav-item-right{
+            &#nav-item-right{
                 transform: rotate(90deg) translateY(-50%);
                 top: 50%;
                 right: $nav-margin;
             }
 
-            &.nav-item-top{
+            &#nav-item-top{
                 top: $nav-margin;
                 left: 50%;
                 transform: translateX(-50%);
             }
 
-            &.nav-item-bottom{
+            &#nav-item-bottom{
                 bottom: $nav-margin;
                 left: 50%;
                 transform: translateX(-50%);

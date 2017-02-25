@@ -11,21 +11,22 @@
     <script type="text/javascript">requirejs(["./resources/js/main.js"], function(){ })</script>
   </head>
   <body>
-    <div class="content">
+    <div id="content">
+            <script type="text/javascript">requirejs(["./resources/js/nav-bar.js"], function(){ })</script>
       <div class="nav-bar">
-        <div class="nav-bar-content"><a class="nav-bar-item nav-item-left">left</a><a class="nav-bar-item nav-item-right">right</a><a class="nav-bar-item nav-item-top">top</a><a class="nav-bar-item nav-item-bottom">bottom</a></div>
+        <div class="nav-bar-content"><a class="nav-bar-item" id="nav-item-left">left</a><a class="nav-bar-item" id="nav-item-right" href="#about">right</a><a class="nav-bar-item" id="nav-item-top">top</a><a class="nav-bar-item" id="nav-item-bottom">bottom</a></div>
       </div>
-      <div class="splash parallax-container">
-        <div class="splash-content-container parallax-element">
-          <h1 class="splash-title-1">cadence</h1>
+      <div class="parallax-container screen" id="home">
+        <div class="home-content-container parallax-element">
+          <h1 class="home-title-1">cadence</h1>
         </div>
-        <div class="splash-background-content">
-          <div class="splash-background-content-darken"></div>
-          <div class="splash-foreground"></div>
-          <div class="splash-background"></div>
+        <div class="home-background-content">
+          <div class="home-background-content-darken"></div>
+          <div class="home-foreground"></div>
+          <div class="home-background"></div>
         </div>
       </div>
-      <div class="random"></div>
+      <div class="screen" id="about"></div>
     </div>
   </body>
 </html>

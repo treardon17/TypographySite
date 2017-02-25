@@ -1,9 +1,62 @@
+#about {
+  background-color: green; }
+
 header {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 100; }
+
+.home-background-image, #home .home-background-content .home-background, #home .home-background-content .home-foreground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-position: center center;
+  background-size: cover; }
+
+.home-title, #home .home-content-container .home-title-1, #home .home-content-container .home-title-2 {
+  position: absolute;
+  font-size: 10em;
+  margin: 0;
+  right: 0;
+  left: 0;
+  letter-spacing: 0.3em;
+  text-align: center;
+  top: 45%;
+  -webkit-transform: translateY(-65%);
+      -ms-transform: translateY(-65%);
+          transform: translateY(-65%);
+  opacity: 0.5;
+  z-index: 5; }
+
+#home {
+  position: relative; }
+  #home .home-background-content .home-background-content-darken {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.3;
+    z-index: 20; }
+  #home .home-background-content .home-background {
+    background-image: url(../images/ocean.JPG);
+    z-index: 0; }
+  #home .home-background-content .home-foreground {
+    background-image: url(../images/ocean-foreground.gif);
+    z-index: 10; }
+  #home .home-content-container {
+    position: relative;
+    height: 100%;
+    width: 100%; }
+    #home .home-content-container .home-title-1 {
+      font-family: "CanterBoldStrips", sans-serif; }
+    #home .home-content-container .home-title-2 {
+      font-family: "CanterBold", sans-serif; }
 
 .nav-bar {
   position: fixed;
@@ -20,83 +73,32 @@ header {
       font-family: "CanterBold", sans-serif;
       position: absolute;
       font-size: 2em;
-      letter-spacing: 0.3em; }
-      .nav-bar .nav-bar-content .nav-bar-item.nav-item-left {
+      letter-spacing: 0.3em;
+      text-decoration: none; }
+      .nav-bar .nav-bar-content .nav-bar-item#nav-item-left {
         -webkit-transform: rotate(-90deg) translateY(-50%);
             -ms-transform: rotate(-90deg) translateY(-50%);
                 transform: rotate(-90deg) translateY(-50%);
         top: 50%;
         left: 15px; }
-      .nav-bar .nav-bar-content .nav-bar-item.nav-item-right {
+      .nav-bar .nav-bar-content .nav-bar-item#nav-item-right {
         -webkit-transform: rotate(90deg) translateY(-50%);
             -ms-transform: rotate(90deg) translateY(-50%);
                 transform: rotate(90deg) translateY(-50%);
         top: 50%;
         right: 15px; }
-      .nav-bar .nav-bar-content .nav-bar-item.nav-item-top {
+      .nav-bar .nav-bar-content .nav-bar-item#nav-item-top {
         top: 15px;
         left: 50%;
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%); }
-      .nav-bar .nav-bar-content .nav-bar-item.nav-item-bottom {
+      .nav-bar .nav-bar-content .nav-bar-item#nav-item-bottom {
         bottom: 15px;
         left: 50%;
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%); }
-
-.splash-background-image, .splash .splash-background-content .splash-background, .splash .splash-background-content .splash-foreground {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-position: center center;
-  background-size: cover; }
-
-.splash-title, .splash .splash-content-container .splash-title-1, .splash .splash-content-container .splash-title-2 {
-  position: absolute;
-  font-size: 10em;
-  margin: 0;
-  right: 0;
-  left: 0;
-  letter-spacing: 0.3em;
-  text-align: center;
-  top: 45%;
-  -webkit-transform: translateY(-65%);
-      -ms-transform: translateY(-65%);
-          transform: translateY(-65%);
-  opacity: 0.5;
-  z-index: 5; }
-
-.splash {
-  position: relative;
-  width: 100%;
-  height: 100vh; }
-  .splash .splash-background-content .splash-background-content-darken {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: black;
-    opacity: 0.3;
-    z-index: 20; }
-  .splash .splash-background-content .splash-background {
-    background-image: url(../images/ocean.JPG);
-    z-index: 0; }
-  .splash .splash-background-content .splash-foreground {
-    background-image: url(../images/ocean-foreground.gif);
-    z-index: 10; }
-  .splash .splash-content-container {
-    position: relative;
-    height: 100%;
-    width: 100%; }
-    .splash .splash-content-container .splash-title-1 {
-      font-family: "CanterBoldStrips", sans-serif; }
-    .splash .splash-content-container .splash-title-2 {
-      font-family: "CanterBold", sans-serif; }
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400");
 @import url("https://fonts.googleapis.com/css?family=Caesar+Dressing");
@@ -129,7 +131,8 @@ header {
 body {
   position: relative;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  overflow: hidden; }
 
 .vignette {
   -webkit-box-shadow: inset 0 0 10em black;
@@ -140,6 +143,27 @@ body {
   width: 100%;
   height: 100%;
   content: ""; }
+
+#content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+.screen {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 100vh; }
 
 .random {
   position: relative;

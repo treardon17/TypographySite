@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cadence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./resources/css/styles.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript" src="./resources/js/require.js"></script>
+    <script type="text/javascript">requirejs(["./resources/js/parallax.js"], function(){ })</script>
+    <script type="text/javascript">requirejs(["./resources/js/main.js"], function(){ })</script>
+  </head>
+  <body>
+    <div class="content">
+      <div class="nav-bar">
+        <div class="nav-bar-content"><a class="nav-bar-item nav-item-left">left</a><a class="nav-bar-item nav-item-right">right</a><a class="nav-bar-item nav-item-top">top</a><a class="nav-bar-item nav-item-bottom">bottom</a></div>
+      </div>
+      <div class="splash parallax-container">
+        <div class="splash-content-container parallax-element">
+          <h1 class="splash-title-1">cadence</h1>
+        </div>
+        <div class="splash-background-content">
+          <div class="splash-background-content-darken"></div>
+          <div class="splash-foreground"></div>
+          <div class="splash-background"></div>
+        </div>
+      </div>
+      <div class="random"></div>
+    </div>
+  </body>
+</html>

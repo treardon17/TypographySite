@@ -1,0 +1,45 @@
+@import '../../resources/sass/_fonts.scss';
+$nav-margin: 15px;
+
+.nav-bar{
+    position: fixed;
+    top: 0; bottom: 0; right: 0; left: 0;
+    z-index: 1000;
+
+    .nav-bar-content{
+        width: 100%;
+        height: 100%;
+
+        .nav-bar-item{
+            color: white;
+            font-family: $canter-bold;
+            position: absolute;
+            font-size: 2em;
+            letter-spacing: 0.3em;
+
+            &.nav-item-left{
+                transform: rotate(-90deg) translateY(-50%);
+                top: 50%;
+                left: $nav-margin;
+            }
+
+            &.nav-item-right{
+                transform: rotate(90deg) translateY(-50%);
+                top: 50%;
+                right: $nav-margin;
+            }
+
+            &.nav-item-top{
+                top: $nav-margin;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            &.nav-item-bottom{
+                bottom: $nav-margin;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}

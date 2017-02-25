@@ -1,0 +1,10 @@
+{
+   "navBar":{
+       "menuItems":[
+           {
+               "title":"Home",
+               "url":""
+           }
+       ]
+   }
+}

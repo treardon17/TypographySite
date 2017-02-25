@@ -1,0 +1,147 @@
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; }
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000; }
+  .nav-bar .nav-bar-content {
+    width: 100%;
+    height: 100%; }
+    .nav-bar .nav-bar-content .nav-bar-item {
+      color: white;
+      font-family: "CanterBold", sans-serif;
+      position: absolute;
+      font-size: 2em;
+      letter-spacing: 0.3em; }
+      .nav-bar .nav-bar-content .nav-bar-item.nav-item-left {
+        -webkit-transform: rotate(-90deg) translateY(-50%);
+            -ms-transform: rotate(-90deg) translateY(-50%);
+                transform: rotate(-90deg) translateY(-50%);
+        top: 50%;
+        left: 15px; }
+      .nav-bar .nav-bar-content .nav-bar-item.nav-item-right {
+        -webkit-transform: rotate(90deg) translateY(-50%);
+            -ms-transform: rotate(90deg) translateY(-50%);
+                transform: rotate(90deg) translateY(-50%);
+        top: 50%;
+        right: 15px; }
+      .nav-bar .nav-bar-content .nav-bar-item.nav-item-top {
+        top: 15px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%); }
+      .nav-bar .nav-bar-content .nav-bar-item.nav-item-bottom {
+        bottom: 15px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%); }
+
+.splash-background-image, .splash .splash-background-content .splash-background, .splash .splash-background-content .splash-foreground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-position: center center;
+  background-size: cover; }
+
+.splash-title, .splash .splash-content-container .splash-title-1, .splash .splash-content-container .splash-title-2 {
+  position: absolute;
+  font-size: 10em;
+  margin: 0;
+  right: 0;
+  left: 0;
+  letter-spacing: 0.3em;
+  text-align: center;
+  top: 45%;
+  -webkit-transform: translateY(-65%);
+      -ms-transform: translateY(-65%);
+          transform: translateY(-65%);
+  opacity: 0.5;
+  z-index: 5; }
+
+.splash {
+  position: relative;
+  width: 100%;
+  height: 100vh; }
+  .splash .splash-background-content .splash-background-content-darken {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.3;
+    z-index: 20; }
+  .splash .splash-background-content .splash-background {
+    background-image: url(../images/ocean.JPG);
+    z-index: 0; }
+  .splash .splash-background-content .splash-foreground {
+    background-image: url(../images/ocean-foreground.gif);
+    z-index: 10; }
+  .splash .splash-content-container {
+    position: relative;
+    height: 100%;
+    width: 100%; }
+    .splash .splash-content-container .splash-title-1 {
+      font-family: "CanterBoldStrips", sans-serif; }
+    .splash .splash-content-container .splash-title-2 {
+      font-family: "CanterBold", sans-serif; }
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400");
+@import url("https://fonts.googleapis.com/css?family=Caesar+Dressing");
+@import url("https://fonts.googleapis.com/css?family=Allerta+Stencil");
+@import url("https://fonts.googleapis.com/css?family=Plaster");
+@font-face {
+  font-family: CanterBold;
+  src: url("../fonts/CanterBold.otf") format("opentype"); }
+
+@font-face {
+  font-family: CanterBold3D;
+  src: url("../fonts/CanterBold3D.otf") format("opentype"); }
+
+@font-face {
+  font-family: CanterBoldShadow;
+  src: url("../fonts/CanterBoldShadow.otf") format("opentype"); }
+
+@font-face {
+  font-family: CanterBoldStrips;
+  src: url("../fonts/CanterBoldStrips.otf") format("opentype"); }
+
+@font-face {
+  font-family: CanterLight;
+  src: url("../fonts/CanterLight.otf") format("opentype"); }
+
+@font-face {
+  font-family: CanterOutline;
+  src: url("../fonts/CanterOutline.otf") format("opentype"); }
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0; }
+
+.vignette {
+  -webkit-box-shadow: inset 0 0 10em black;
+  box-shadow: inset 0 -0 10em black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: ""; }
+
+.random {
+  position: relative;
+  width: 100%;
+  height: 500em; }

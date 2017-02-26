@@ -1,5 +1,5 @@
 @import '../../resources/sass/_fonts.scss';
-$nav-margin: 30px;
+$nav-margin: 2em;
 $nav-hidden-margin: -100%;
 
 .nav-bar{
@@ -11,26 +11,38 @@ $nav-hidden-margin: -100%;
         position: relative;
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .nav-item-container{
             position: absolute;
+            transition: 1s ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: 1s ease-in-out;
+
+            .nav-bar-item{
+                color: white;
+                font-family: $canter-bold;
+                font-size: 2em;
+                letter-spacing: 0.3em;
+                text-decoration: none;
+                text-transform: lowercase;
+                position: absolute;
+            }
 
             &.nav-item-container-left{
-                transform: rotate(-90deg) translateY(-50%);
-                top: 50%;
+                transform: rotate(-90deg);
                 left: $nav-margin;
+
                 &.hidden{
                     left: $nav-hidden-margin;
                 }
             }
 
             &.nav-item-container-right{
-                transform: rotate(90deg) translateY(-50%);
-                top: 50%;
+                transform: rotate(90deg);
                 right: $nav-margin;
                 &.hidden{
                     right: $nav-hidden-margin;
@@ -39,8 +51,6 @@ $nav-hidden-margin: -100%;
 
             &.nav-item-container-top{
                 top: $nav-margin;
-                left: 50%;
-                transform: translateX(-50%);
                 &.hidden{
                     top: $nav-hidden-margin;
                 }
@@ -53,16 +63,6 @@ $nav-hidden-margin: -100%;
                 &.hidden{
                     bottom: $nav-hidden-margin;
                 }
-            }
-
-            .nav-bar-item{
-                color: white;
-                font-family: $canter-bold;
-                position: absolute;
-                font-size: 2em;
-                letter-spacing: 0.3em;
-                text-decoration: none;
-                text-transform: lowercase;
             }
         }
     }

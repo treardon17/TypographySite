@@ -1,8 +1,8 @@
-#about {
-  background-color: green; }
-
 #contact {
   background-color: red; }
+
+#about {
+  background-color: green; }
 
 .contact-form {
   height: 100vh;
@@ -189,9 +189,23 @@ header {
   .nav-bar .nav-bar-content {
     position: relative;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
     .nav-bar .nav-bar-content .nav-item-container {
       position: absolute;
+      -webkit-transition: 1s ease-in-out;
+      transition: 1s ease-in-out;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -203,49 +217,41 @@ header {
       -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
-              align-items: center;
-      -webkit-transition: 1s ease-in-out;
-      transition: 1s ease-in-out; }
+              align-items: center; }
+      .nav-bar .nav-bar-content .nav-item-container .nav-bar-item {
+        color: white;
+        font-family: "CanterBold", sans-serif;
+        font-size: 2em;
+        letter-spacing: 0.3em;
+        text-decoration: none;
+        text-transform: lowercase;
+        position: absolute; }
       .nav-bar .nav-bar-content .nav-item-container.nav-item-container-left {
-        -webkit-transform: rotate(-90deg) translateY(-50%);
-            -ms-transform: rotate(-90deg) translateY(-50%);
-                transform: rotate(-90deg) translateY(-50%);
-        top: 50%;
-        left: 30px; }
+        -webkit-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+        left: 2em; }
         .nav-bar .nav-bar-content .nav-item-container.nav-item-container-left.hidden {
           left: -100%; }
       .nav-bar .nav-bar-content .nav-item-container.nav-item-container-right {
-        -webkit-transform: rotate(90deg) translateY(-50%);
-            -ms-transform: rotate(90deg) translateY(-50%);
-                transform: rotate(90deg) translateY(-50%);
-        top: 50%;
-        right: 30px; }
+        -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+        right: 2em; }
         .nav-bar .nav-bar-content .nav-item-container.nav-item-container-right.hidden {
           right: -100%; }
       .nav-bar .nav-bar-content .nav-item-container.nav-item-container-top {
-        top: 30px;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-            -ms-transform: translateX(-50%);
-                transform: translateX(-50%); }
+        top: 2em; }
         .nav-bar .nav-bar-content .nav-item-container.nav-item-container-top.hidden {
           top: -100%; }
       .nav-bar .nav-bar-content .nav-item-container.nav-item-container-bottom {
-        bottom: 30px;
+        bottom: 2em;
         left: 50%;
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%); }
         .nav-bar .nav-bar-content .nav-item-container.nav-item-container-bottom.hidden {
           bottom: -100%; }
-      .nav-bar .nav-bar-content .nav-item-container .nav-bar-item {
-        color: white;
-        font-family: "CanterBold", sans-serif;
-        position: absolute;
-        font-size: 2em;
-        letter-spacing: 0.3em;
-        text-decoration: none;
-        text-transform: lowercase; }
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400");
 @import url("https://fonts.googleapis.com/css?family=Caesar+Dressing");

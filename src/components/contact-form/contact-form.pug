@@ -1,0 +1,11 @@
+include ../fancy-text-box/fancy-text-box
+include ../fancy-text-area/fancy-text-area
+
+div(class="contact-form")
+  div(class="contact-form-content")
+    form(class="contact-form-form" action="contact-form.php")
+      +fancy-text-box("First Name", "first-name")
+      +fancy-text-box("Last Name", "last-name")
+      +fancy-text-box("Email", "email")
+      +fancy-text-area("message")
+      input(class="contact-form-submit" type="Submit" value="Submit")

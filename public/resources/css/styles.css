@@ -4,8 +4,123 @@
 #contact {
   background-color: red; }
 
+.contact-form {
+  height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .contact-form .contact-form-background {
+    -webkit-filter: brightness(0.5);
+            filter: brightness(0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url("../../resources/images/gc-blue-river.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; }
+  .contact-form .contact-form-title {
+    display: inline-block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    height: 100%;
+    width: 10%;
+    color: white; }
+  .contact-form .contact-form-content {
+    -webkit-box-flex: 11;
+    -webkit-flex: 11;
+        -ms-flex: 11;
+            flex: 11;
+    height: 100%;
+    text-align: center; }
+    .contact-form .contact-form-content > * {
+      opacity: 0.5; }
+    .contact-form .contact-form-content .contact-form-form {
+      z-index: 2000;
+      position: relative;
+      display: inline-block;
+      top: 50%;
+      width: 50%;
+      min-width: 350px;
+      -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+              transform: translateY(-50%); }
+      .contact-form .contact-form-content .contact-form-form .fancy-text-box, .contact-form .contact-form-content .contact-form-form .contact-form-message, .contact-form .contact-form-content .contact-form-form .contact-form-submit {
+        width: 100%;
+        height: 2em;
+        margin-bottom: 0.5em; }
+
 #examples {
   background-color: blue; }
+
+.fancy-text-area .fancy-text-area-input {
+  width: 100%;
+  height: 15em;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: black;
+  color: white;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  border: none;
+  outline: none;
+  resize: none; }
+
+.fancy-text-box {
+  font-family: "Open Sans", sans-serif;
+  position: relative;
+  min-height: 3em;
+  min-width: 5em;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  overflow: hidden;
+  color: white; }
+  .fancy-text-box .fancy-text-box-content .fancy-text-box-placeholder, .fancy-text-box .fancy-text-box-content .fancy-text-box-input {
+    position: absolute;
+    display: inline-block;
+    margin: 0; }
+  .fancy-text-box .fancy-text-box-content .fancy-text-box-placeholder {
+    -webkit-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+            transform-origin: 0 0;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    text-transform: lowercase;
+    font-size: 1em;
+    font-weight: bold;
+    -webkit-transition: 0.33s ease;
+    transition: 0.33s ease; }
+    .fancy-text-box .fancy-text-box-content .fancy-text-box-placeholder.fancy-text-box-placeholder-origin {
+      left: 10px;
+      top: 5px;
+      -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+              transform: translate(0, 0); }
+    .fancy-text-box .fancy-text-box-content .fancy-text-box-placeholder.fancy-text-box-placeholder-small {
+      -webkit-transform: scale(0.5);
+          -ms-transform: scale(0.5);
+              transform: scale(0.5); }
+  .fancy-text-box .fancy-text-box-content .fancy-text-box-input {
+    padding: 15px 10px 5px 10px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border: none;
+    outline: 0;
+    font-size: 1.5em;
+    vertical-align: bottom;
+    background-color: black;
+    color: white; }
 
 header {
   position: fixed;

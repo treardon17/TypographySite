@@ -1,0 +1,8 @@
+include ../../util/include/include-script
+
++include-script("./resources/js/fancy-text-box.js")
+mixin fancy-text-box(placeholder, name)
+    div(class="fancy-text-box")
+        div(class="fancy-text-box-content")
+            input(class="fancy-text-box-input" type="text" name=name)
+            h4(class="fancy-text-box-placeholder") #{placeholder}

@@ -1,0 +1,51 @@
+@import "../../resources/sass/_fonts.scss";
+
+.fancy-text-box{
+    font-family: $open-sans;
+    position: relative;
+    min-height: 3em;
+    min-width: 5em;
+    border-radius: 5px;
+    overflow: hidden;
+    color: white;
+
+    .fancy-text-box-content{
+
+        .fancy-text-box-placeholder, .fancy-text-box-input{
+            position: absolute;
+            display: inline-block;
+            margin: 0;
+        }
+
+        .fancy-text-box-placeholder{
+            transform-origin: 0 0;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            text-transform: lowercase;
+            font-size: 1em;
+            font-weight: bold;
+            transition: 0.33s ease;
+
+            &.fancy-text-box-placeholder-origin{
+                left: 10px; top: 5px;
+                transform: translate(0,0);
+            }
+
+            &.fancy-text-box-placeholder-small{
+                transform: scale(0.5);
+            }
+        }
+
+        .fancy-text-box-input{
+            padding: 15px 10px 5px 10px;
+            top: 0; bottom: 0; left: 0;
+            width: 100%;
+            border: none;
+            outline: 0;
+            font-size: 1.5em;
+            vertical-align: bottom;
+            background-color: black;
+            color: white;
+        }
+    }
+}

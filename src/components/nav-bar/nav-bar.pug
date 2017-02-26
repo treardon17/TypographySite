@@ -2,7 +2,11 @@ include ../../util/include/include-script
 +include-script('./resources/js/nav-bar.js')
 div(class="nav-bar")
     div(class="nav-bar-content")
-        a(id="nav-item-left" class="nav-bar-item" href="#examples") left
-        a(id="nav-item-right" class="nav-bar-item" href="#about") right
-        a(id="nav-item-top" class="nav-bar-item" href="#contact") top
-        a(id="nav-item-bottom" class="nav-bar-item") bottom
+        div(class="nav-item-container nav-item-container-left")
+            a(id="nav-item-left" class="nav-bar-item" href="#") left
+        div(class="nav-item-container nav-item-container-right")
+            a(id="nav-item-right" class="nav-bar-item" href="#") right
+        div(class="nav-item-container nav-item-container-top")
+            a(id="nav-item-top" class="nav-bar-item" href="#") top
+        div(class="nav-item-container nav-item-container-bottom")
+            a(id="nav-item-bottom" class="nav-bar-item" href="#") bottom

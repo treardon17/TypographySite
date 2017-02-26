@@ -8,13 +8,22 @@ var NavBar = function () {
     function NavBar() {
         _classCallCheck(this, NavBar);
 
-        this.pageContent = $('#content');
-        this.screens = $('.screen');
         this.navButtons = $('.nav-bar-item');
-        this.setUpListeners();
+        this.pageContent = $('#content');
+        this.contentRows = $('.content-row');
 
+        //make a grid of screens
+        //  note: each content-row must have the same number of screens.
+        //  if there are not enough screens, enter an 'empty-screen' to fill the space
+        this.screenGrid = [];
+        for (var i = 0; i < this.contentRows.length; i++) {
+            this.screenGrid[i] = $(this.contentRows[i]).find('.screen');
+        }
+
+        this.currentScreenPos = { row: 0, col: 0 };
         this.currentPage = null;
         this.setCurrentPage({ animated: false });
+        this.setUpListeners();
     }
 
     _createClass(NavBar, [{
@@ -31,6 +40,41 @@ var NavBar = function () {
             });
         }
     }, {
+        key: 'setCurrentScreenPos',
+        value: function setCurrentScreenPos() {
+            if (!this.currentPage) {
+                console.log("current page not defined");
+                return;
+            }
+
+            for (var row = 0; row < this.screenGrid.length; row++) {
+                for (var col = 0; col < this.screenGrid[row].length; col++) {
+                    if ($(this.currentPage).attr('id') === $(this.screenGrid[row][col]).attr('id')) {
+                        this.currentScreenPos = { row: row, col: col };
+                        return;
+                    }
+                }
+            }
+        }
+    }, {
+        key: 'setMenuItemsForCurrentPos',
+        value: function setMenuItemsForCurrentPos() {
+            var info = this.getNavBarMenuInfoForGridPos(this.currentScreenPos);
+            this.setMenuItem({ selector: '#nav-item-left', href: info.left.href, name: info.left.name });
+            this.setMenuItem({ selector: '#nav-item-right', href: info.right.href, name: info.right.name });
+            this.setMenuItem({ selector: '#nav-item-top', href: info.top.href, name: info.top.name });
+            this.setMenuItem({ selector: '#nav-item-bottom', href: info.bottom.href, name: info.bottom.name });
+        }
+    }, {
+        key: 'setMenuItem',
+        value: function setMenuItem() {
+            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { selector: "", href: "", name: "" };
+
+            var item = $(pObject.selector);
+            $(item).text(pObject.name);
+            $(item).attr('href', pObject.href);
+        }
+    }, {
         key: 'setCurrentPage',
         value: function setCurrentPage() {
             var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { animated: true };
@@ -40,7 +84,7 @@ var NavBar = function () {
                 page = '#home';
             }
             this.moveElementIntoView({ element: $(page), animated: pObject.animated });
-            this.currentPage = $(page);
+            this.currentPage = $(page).first();
         }
     }, {
         key: 'moveElementIntoView',
@@ -49,9 +93,7 @@ var NavBar = function () {
 
             var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { element: null, animated: true, callback: function callback() {} };
 
-            if (pObject.element === null) {
-                return;
-            }
+            if (pObject.element === null) return;
 
             var animationTime = pObject.animated ? 800 : 0;
             var windowTop = $(window).scrollTop();
@@ -63,6 +105,8 @@ var NavBar = function () {
                 // Add hash (#) to URL when done scrolling (default click behavior)
                 window.location.hash = $(pObject.element).attr('id') ? '#' + $(pObject.element).attr('id') : '';
                 _this2.currentPage = $(window.location.hash);
+                _this2.setCurrentScreenPos();
+                _this2.setMenuItemsForCurrentPos();
                 // Call the callback function
                 if (typeof pObject.callback === 'function') {
                     pObject.callback();
@@ -71,13 +115,13 @@ var NavBar = function () {
 
             //get the number of pages on the current content row
             var container = $(this.currentPage).closest('.content-row');
-            var numPages = $(container).find('.screen').length;
+            var numPages = $(container).find('.screen :not(.empty-screen)').length;
 
             //get the number of pages on the next content row
             container = $(pObject.element).closest('.content-row');
-            var numNextPages = $(container).find('.screen').length;
+            var numNextPages = $(container).find('.screen :not(.empty-screen)').length;
 
-            this.scrollToPos({ duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages });
+            this.scrollToPos({ duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion });
         }
     }, {
         key: 'scrollToPos',
@@ -122,6 +166,118 @@ var NavBar = function () {
                     });
                 });
             }
+        }
+    }, {
+        key: 'checkScreenGridOutOfBounds',
+        value: function checkScreenGridOutOfBounds() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            //make sure our indices are not out of bounds
+            if (coord == null || coord.row < 0 || coord.row >= this.screenGrid.length || this.screenGrid.length == 0 || coord.col < 0 || coord.col >= this.screenGrid[0].length || this.screenGrid[0].length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }, {
+        key: 'getNavBarMenuInfoForGridPos',
+        value: function getNavBarMenuInfoForGridPos() {
+            var gridPos = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            if (this.checkScreenGridOutOfBounds(gridPos)) return null;
+
+            var leftCoord = gridPos.col - 1 >= 0 ? { row: gridPos.row, col: gridPos.col - 1 } : null;
+            var topCoord = gridPos.row - 1 >= 0 ? { row: gridPos.row - 1, col: gridPos.col } : null;
+            var rightCoord = gridPos.col + 1 <= this.screenGrid[0].length - 1 ? { row: gridPos.row, col: gridPos.col + 1 } : null;
+            var bottomCoord = gridPos.row + 1 <= this.screenGrid.length - 1 ? { row: gridPos.row + 1, col: gridPos.col } : null;
+
+            var coords = {
+                top: this.coordPointingToValidScreen(topCoord) ? this.getInfoForScreenAtCoord(topCoord) : this.getInfoForValidScreenForRow(topCoord),
+                bottom: this.coordPointingToValidScreen(bottomCoord) ? this.getInfoForScreenAtCoord(bottomCoord) : this.getInfoForValidScreenForRow(bottomCoord),
+                right: this.coordPointingToValidScreen(rightCoord) ? this.getInfoForScreenAtCoord(rightCoord) : this.getInfoForValidScreenForCol(rightCoord),
+                left: this.coordPointingToValidScreen(leftCoord) ? this.getInfoForScreenAtCoord(leftCoord) : this.getInfoForValidScreenForCol(leftCoord)
+            };
+
+            return coords;
+        }
+    }, {
+        key: 'coordPointingToValidScreen',
+        value: function coordPointingToValidScreen() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            if (this.checkScreenGridOutOfBounds(coord) || coord == null) return false;
+
+            var element = this.screenGrid[coord.row][coord.col];
+            //if it's not an empty screen and it is a screen, we're good
+            if (!$(element).hasClass('empty-screen') && $(element).hasClass('screen')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }, {
+        key: 'getInfoForValidScreenForRow',
+        value: function getInfoForValidScreenForRow() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            var newCoord = this.getCoordForValidScreenForRow(coord);
+            return this.getInfoForScreenAtCoord(newCoord);
+        }
+    }, {
+        key: 'getCoordForValidScreenForRow',
+        value: function getCoordForValidScreenForRow() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            //make sure we're not going out of bounds
+            if (this.checkScreenGridOutOfBounds(coord)) return null;
+
+            for (var col = 0; col < this.screenGrid[coord.row].length; col++) {
+                var screen = $(this.screenGrid[coord.row][col]);
+                //if it is a valid screen
+                if (!$(screen).hasClass('empty-screen')) {
+                    return { row: coord.row, col: col };
+                }
+            }
+            //we didn't find anything
+            return null;
+        }
+    }, {
+        key: 'getInfoForValidScreenForCol',
+        value: function getInfoForValidScreenForCol() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            var newCoord = this.getCoordForValidScreenForCol(coord);
+            return this.getInfoForScreenAtCoord(newCoord);
+        }
+    }, {
+        key: 'getCoordForValidScreenForCol',
+        value: function getCoordForValidScreenForCol() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            //make sure we're not going out of bounds
+            if (this.checkScreenGridOutOfBounds(coord)) return null;
+
+            for (var row = 0; row < this.screenGrid.length; row++) {
+                var screen = $(this.screenGrid[row][coord.col]);
+                //if it is a valid screen
+                if (!$(screen).hasClass('empty-screen')) {
+                    return { row: row, col: coord.col };
+                }
+            }
+            //we didn't find anything
+            return null;
+        }
+    }, {
+        key: 'getInfoForScreenAtCoord',
+        value: function getInfoForScreenAtCoord() {
+            var coord = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { row: 0, col: 0 };
+
+            var returnObject = { name: '', href: '' };
+            if (coord != null) {
+                returnObject.name = $(this.screenGrid[coord.row][coord.col]).attr('title');
+                returnObject.href = '#' + $(this.screenGrid[coord.row][coord.col]).attr('id');
+            }
+            return returnObject;
         }
     }, {
         key: 'handleNavigate',

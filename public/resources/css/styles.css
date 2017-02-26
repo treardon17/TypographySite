@@ -72,39 +72,55 @@ header {
   left: 0;
   z-index: 1000; }
   .nav-bar .nav-bar-content {
+    position: relative;
     width: 100%;
     height: 100%; }
-    .nav-bar .nav-bar-content .nav-bar-item {
-      color: white;
-      font-family: "CanterBold", sans-serif;
+    .nav-bar .nav-bar-content .nav-item-container {
       position: absolute;
-      font-size: 2em;
-      letter-spacing: 0.3em;
-      text-decoration: none; }
-      .nav-bar .nav-bar-content .nav-bar-item#nav-item-left {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .nav-bar .nav-bar-content .nav-item-container.nav-item-container-left {
         -webkit-transform: rotate(-90deg) translateY(-50%);
             -ms-transform: rotate(-90deg) translateY(-50%);
                 transform: rotate(-90deg) translateY(-50%);
         top: 50%;
-        left: 15px; }
-      .nav-bar .nav-bar-content .nav-bar-item#nav-item-right {
+        left: 30px; }
+      .nav-bar .nav-bar-content .nav-item-container.nav-item-container-right {
         -webkit-transform: rotate(90deg) translateY(-50%);
             -ms-transform: rotate(90deg) translateY(-50%);
                 transform: rotate(90deg) translateY(-50%);
         top: 50%;
-        right: 15px; }
-      .nav-bar .nav-bar-content .nav-bar-item#nav-item-top {
-        top: 15px;
+        right: 30px; }
+      .nav-bar .nav-bar-content .nav-item-container.nav-item-container-top {
+        top: 30px;
         left: 50%;
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%); }
-      .nav-bar .nav-bar-content .nav-bar-item#nav-item-bottom {
-        bottom: 15px;
+      .nav-bar .nav-bar-content .nav-item-container.nav-item-container-bottom {
+        bottom: 30px;
         left: 50%;
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%); }
+      .nav-bar .nav-bar-content .nav-item-container .nav-bar-item {
+        color: white;
+        font-family: "CanterBold", sans-serif;
+        position: absolute;
+        font-size: 2em;
+        letter-spacing: 0.3em;
+        text-decoration: none;
+        text-transform: lowercase; }
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400");
 @import url("https://fonts.googleapis.com/css?family=Caesar+Dressing");

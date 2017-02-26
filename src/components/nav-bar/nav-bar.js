@@ -15,8 +15,12 @@ class NavBar{
 
         this.currentScreenPos = {row: 0, col: 0};
         this.currentPage = null;
-        this.setCurrentPage({animated: false});
         this.setUpListeners();
+    }
+
+    load(pObject = {callback: ()=>{}}){
+        this.setScreenSize();
+        this.setCurrentPage({animated: false, callback: pObject.callback});
     }
 
     setUpListeners(){
@@ -27,6 +31,14 @@ class NavBar{
         window.onpopstate = ()=>{
             this.setCurrentPage({animated: true});
         };
+    }
+
+    setScreenSize(){
+        let screens = $('.content-row').first().find('.screen');
+        let content = $('#content');
+        if(screens.length > 0){
+          $(content).css({'width':(100*screens.length) + 'vw'});
+        }
     }
 
     setCurrentScreenPos(){
@@ -59,12 +71,12 @@ class NavBar{
         $(item).attr('href', pObject.href);
     }
 
-    setCurrentPage(pObject = {animated: true}){
+    setCurrentPage(pObject = {animated: true, callback:()=>{}}){
         let page = window.location.hash;
         if(page === ''){
             page = '#home'
         }
-        this.moveElementIntoView({element: $(page), animated:pObject.animated});
+        this.moveElementIntoView({element: $(page), animated:pObject.animated, callback: pObject.callback});
         this.currentPage = $(page).first();
     }
 
@@ -88,15 +100,6 @@ class NavBar{
             }
         }
 
-        // //get the number of pages on the current content row
-        // let container = $(this.currentPage).closest('.content-row');
-        // const numPages = $(container).find('.screen :not(.empty-screen)').length;
-        //
-        // //get the number of pages on the next content row
-        // container = $(pObject.element).closest('.content-row');
-        // const numNextPages = $(container).find('.screen :not(.empty-screen)').length;
-
-        // this.scrollToPos({duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion});
         this.scrollToPos({duration: animationTime, left: left, top: top, callback: completion});
     }
 
@@ -224,7 +227,3 @@ class NavBar{
         }
     }
 }
-
-$(document).ready(()=>{
-    let navBar = new NavBar();
-});

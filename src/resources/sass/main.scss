@@ -7,6 +7,11 @@ html, body{
     margin: 0;
     padding: 0;
     background-color: #322F31;
+    transition: 1s ease-in-out;
+
+    &.hidden{
+        opacity: 0;
+    }
 }
 
 #viewport{

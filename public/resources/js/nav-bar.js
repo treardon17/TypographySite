@@ -23,11 +23,18 @@ var NavBar = function () {
 
         this.currentScreenPos = { row: 0, col: 0 };
         this.currentPage = null;
-        this.setCurrentPage({ animated: false });
         this.setUpListeners();
     }
 
     _createClass(NavBar, [{
+        key: 'load',
+        value: function load() {
+            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { callback: function callback() {} };
+
+            this.setScreenSize();
+            this.setCurrentPage({ animated: false, callback: pObject.callback });
+        }
+    }, {
         key: 'setUpListeners',
         value: function setUpListeners() {
             var _this = this;
@@ -39,6 +46,15 @@ var NavBar = function () {
             window.onpopstate = function () {
                 _this.setCurrentPage({ animated: true });
             };
+        }
+    }, {
+        key: 'setScreenSize',
+        value: function setScreenSize() {
+            var screens = $('.content-row').first().find('.screen');
+            var content = $('#content');
+            if (screens.length > 0) {
+                $(content).css({ 'width': 100 * screens.length + 'vw' });
+            }
         }
     }, {
         key: 'setCurrentScreenPos',
@@ -78,13 +94,13 @@ var NavBar = function () {
     }, {
         key: 'setCurrentPage',
         value: function setCurrentPage() {
-            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { animated: true };
+            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { animated: true, callback: function callback() {} };
 
             var page = window.location.hash;
             if (page === '') {
                 page = '#home';
             }
-            this.moveElementIntoView({ element: $(page), animated: pObject.animated });
+            this.moveElementIntoView({ element: $(page), animated: pObject.animated, callback: pObject.callback });
             this.currentPage = $(page).first();
         }
     }, {
@@ -112,15 +128,6 @@ var NavBar = function () {
                 }
             };
 
-            // //get the number of pages on the current content row
-            // let container = $(this.currentPage).closest('.content-row');
-            // const numPages = $(container).find('.screen :not(.empty-screen)').length;
-            //
-            // //get the number of pages on the next content row
-            // container = $(pObject.element).closest('.content-row');
-            // const numNextPages = $(container).find('.screen :not(.empty-screen)').length;
-
-            // this.scrollToPos({duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion});
             this.scrollToPos({ duration: animationTime, left: left, top: top, callback: completion });
         }
     }, {
@@ -276,7 +283,3 @@ var NavBar = function () {
 
     return NavBar;
 }();
-
-$(document).ready(function () {
-    var navBar = new NavBar();
-});

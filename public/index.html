@@ -11,7 +11,7 @@
     <script type="text/javascript">requirejs(["./resources/js/main.js"], function(){ })</script>
   </head>
   <body>
-    <div id="content">
+    <div id="viewport">
             <script type="text/javascript">requirejs(["./resources/js/nav-bar.js"], function(){ })</script>
       <div class="nav-bar">
         <div class="nav-bar-content">
@@ -21,24 +21,28 @@
           <div class="nav-item-container nav-item-container-bottom"><a class="nav-bar-item" id="nav-item-bottom" href="#">bottom</a></div>
         </div>
       </div>
-      <div class="content-row">
-        <div class="empty-screen screen"></div>
-        <div class="screen" id="contact" title="Contact"></div>
-        <div class="empty-screen screen"></div>
-      </div>
-      <div class="content-row">
-        <div class="screen" id="examples" title="Examples"></div>
-        <div class="parallax-container screen" id="home" title="Home">
-          <div class="home-content-container parallax-element">
-            <h1 class="home-title-1">cadence</h1>
+      <div id="viewport-content">
+        <div id="content">
+          <div class="content-row">
+            <div class="empty-screen screen"></div>
+            <div class="screen" id="contact" name="#contact" title="Contact"></div>
+            <div class="empty-screen screen"></div>
           </div>
-          <div class="home-background-content">
-            <div class="home-background-content-darken"></div>
-            <div class="home-foreground"></div>
-            <div class="home-background"></div>
+          <div class="content-row">
+            <div class="screen" id="examples" name="#examples" title="Examples"></div>
+            <div class="parallax-container screen" id="home" name="#home" title="Home">
+              <div class="home-content-container parallax-element">
+                <h1 class="home-title-1">cadence</h1>
+              </div>
+              <div class="home-background-content">
+                <div class="home-background-content-darken"></div>
+                <div class="home-foreground"></div>
+                <div class="home-background"></div>
+              </div>
+            </div>
+            <div class="screen" id="about" name="#about" title="About"></div>
           </div>
         </div>
-        <div class="screen" id="about" title="About"></div>
       </div>
     </div>
   </body>

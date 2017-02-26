@@ -9,6 +9,7 @@ var NavBar = function () {
         _classCallCheck(this, NavBar);
 
         this.navButtons = $('.nav-bar-item');
+        this.navButtonContainers = $('.nav-item-container');
         this.pageContent = $('#content');
         this.contentRows = $('.content-row');
 
@@ -35,9 +36,9 @@ var NavBar = function () {
                 _this.handleNavigate(event);
             });
 
-            $(window).on('popstate', function () {
+            window.onpopstate = function () {
                 _this.setCurrentPage({ animated: true });
-            });
+            };
         }
     }, {
         key: 'setCurrentScreenPos',
@@ -96,15 +97,13 @@ var NavBar = function () {
             if (pObject.element === null) return;
 
             var animationTime = pObject.animated ? 800 : 0;
-            var windowTop = $(window).scrollTop();
-            var windowLeft = $(window).scrollLeft();
-            var top = $(pObject.element).offset().top;
-            var left = $(pObject.element).offset().left;
+            var top = $(pObject.element).position().top;
+            var left = $(pObject.element).position().left;
 
             var completion = function completion() {
                 // Add hash (#) to URL when done scrolling (default click behavior)
-                window.location.hash = $(pObject.element).attr('id') ? '#' + $(pObject.element).attr('id') : '';
-                _this2.currentPage = $(window.location.hash);
+                // window.location.hash = $(pObject.element).attr('id') ? '#'+$(pObject.element).attr('id') : '';
+                _this2.currentPage = $(pObject.element);
                 _this2.setCurrentScreenPos();
                 _this2.setMenuItemsForCurrentPos();
                 // Call the callback function
@@ -113,59 +112,37 @@ var NavBar = function () {
                 }
             };
 
-            //get the number of pages on the current content row
-            var container = $(this.currentPage).closest('.content-row');
-            var numPages = $(container).find('.screen :not(.empty-screen)').length;
+            // //get the number of pages on the current content row
+            // let container = $(this.currentPage).closest('.content-row');
+            // const numPages = $(container).find('.screen :not(.empty-screen)').length;
+            //
+            // //get the number of pages on the next content row
+            // container = $(pObject.element).closest('.content-row');
+            // const numNextPages = $(container).find('.screen :not(.empty-screen)').length;
 
-            //get the number of pages on the next content row
-            container = $(pObject.element).closest('.content-row');
-            var numNextPages = $(container).find('.screen :not(.empty-screen)').length;
-
-            this.scrollToPos({ duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion });
+            // this.scrollToPos({duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion});
+            this.scrollToPos({ duration: animationTime, left: left, top: top, callback: completion });
         }
     }, {
         key: 'scrollToPos',
         value: function scrollToPos() {
-            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { duration: 0, left: 0, right: 0, verticalFirst: true, callback: function callback() {} };
+            var _this3 = this;
+
+            var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { duration: 0, left: 0, top: 0, callback: function callback() {} };
 
             var windowTop = $(window).scrollTop();
             var windowLeft = $(window).scrollLeft();
             var topChange = windowTop !== pObject.top;
             var leftChange = windowLeft !== pObject.left;
-            var scroller = '#content, body';
 
-            //if our current position is diagonal from the destination
-            //  we want the animation to still be the same length (even though there are two animations)
-            //  so we cut the animation time for both animations in half
-            if (topChange && leftChange) {
-                pObject.duration = pObject.duration / 2;
-            }
-
-            if (pObject.verticalFirst) {
-                $(scroller).animate({
-                    scrollTop: pObject.top
-                }, topChange ? pObject.duration : 0, function () {
-                    $(scroller).animate({
-                        scrollLeft: pObject.left
-                    }, leftChange ? pObject.duration : 0, function () {
-                        if (typeof pObject.callback === 'function') {
-                            pObject.callback();
-                        }
-                    });
-                });
-            } else {
-                $(scroller).animate({
-                    scrollLeft: pObject.left
-                }, leftChange ? pObject.duration : 0, function () {
-                    $(scroller).animate({
-                        scrollTop: pObject.top
-                    }, topChange ? pObject.duration : 0, function () {
-                        if (typeof pObject.callback === 'function') {
-                            pObject.callback();
-                        }
-                    });
-                });
-            }
+            $('#viewport-content').addClass('content-scaled');
+            $(this.navButtonContainers).addClass('hidden');
+            setTimeout(function () {
+                $('#viewport-content').removeClass('content-scaled');
+                $(_this3.navButtonContainers).removeClass('hidden');
+            }, 700);
+            $('#content').css({ 'margin-top': -pObject.top + 'px', 'margin-left': -pObject.left + 'px' });
+            setTimeout(pObject.callback, 1000);
         }
     }, {
         key: 'checkScreenGridOutOfBounds',
@@ -286,8 +263,10 @@ var NavBar = function () {
             if (event.target.hash !== "") {
                 // Prevent default anchor click behavior
                 event.preventDefault();
+                history.pushState(null, null, event.target.hash);
+                this.setCurrentPage();
                 // Move that page into view
-                this.moveElementIntoView({ element: event.target.hash, animated: true });
+                // this.moveElementIntoView({element: event.target.hash, animated: true});
             }
         }
     }]);

@@ -1,5 +1,6 @@
 @import '../../resources/sass/_fonts.scss';
 $nav-margin: 30px;
+$nav-hidden-margin: -100%;
 
 .nav-bar{
     position: fixed;
@@ -16,29 +17,42 @@ $nav-margin: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: 1s ease-in-out;
 
             &.nav-item-container-left{
                 transform: rotate(-90deg) translateY(-50%);
                 top: 50%;
                 left: $nav-margin;
+                &.hidden{
+                    left: $nav-hidden-margin;
+                }
             }
 
             &.nav-item-container-right{
                 transform: rotate(90deg) translateY(-50%);
                 top: 50%;
                 right: $nav-margin;
+                &.hidden{
+                    right: $nav-hidden-margin;
+                }
             }
 
             &.nav-item-container-top{
                 top: $nav-margin;
                 left: 50%;
                 transform: translateX(-50%);
+                &.hidden{
+                    top: $nav-hidden-margin;
+                }
             }
 
             &.nav-item-container-bottom{
                 bottom: $nav-margin;
                 left: 50%;
                 transform: translateX(-50%);
+                &.hidden{
+                    bottom: $nav-hidden-margin;
+                }
             }
 
             .nav-bar-item{

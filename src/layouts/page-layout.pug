@@ -17,6 +17,8 @@ html
 
     body
         block pre-content
-        div(id="content")
+        div(id="viewport")
             include ../components/nav-bar/nav-bar
-            block content
+            div(id="viewport-content")
+                div(id="content")
+                    block content

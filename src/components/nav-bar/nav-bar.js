@@ -1,6 +1,7 @@
 class NavBar{
     constructor(){
         this.navButtons = $('.nav-bar-item');
+        this.navButtonContainers = $('.nav-item-container');
         this.pageContent = $('#content');
         this.contentRows = $('.content-row');
 
@@ -23,9 +24,9 @@ class NavBar{
             this.handleNavigate(event);
         });
 
-        $(window).on('popstate', ()=>{
+        window.onpopstate = ()=>{
             this.setCurrentPage({animated: true});
-        });
+        };
     }
 
     setCurrentScreenPos(){
@@ -72,15 +73,13 @@ class NavBar{
             return;
 
         let animationTime = pObject.animated ? 800 : 0;
-        const windowTop = $(window).scrollTop();
-        const windowLeft = $(window).scrollLeft();
-        const top = $(pObject.element).offset().top;
-        const left = $(pObject.element).offset().left;
+        let top = $(pObject.element).position().top;
+        let left = $(pObject.element).position().left;
 
         const completion = () => {
             // Add hash (#) to URL when done scrolling (default click behavior)
-            window.location.hash = $(pObject.element).attr('id') ? '#'+$(pObject.element).attr('id') : '';
-            this.currentPage = $(window.location.hash);
+            // window.location.hash = $(pObject.element).attr('id') ? '#'+$(pObject.element).attr('id') : '';
+            this.currentPage = $(pObject.element);
             this.setCurrentScreenPos();
             this.setMenuItemsForCurrentPos();
             // Call the callback function
@@ -89,56 +88,32 @@ class NavBar{
             }
         }
 
-        //get the number of pages on the current content row
-        let container = $(this.currentPage).closest('.content-row');
-        const numPages = $(container).find('.screen :not(.empty-screen)').length;
+        // //get the number of pages on the current content row
+        // let container = $(this.currentPage).closest('.content-row');
+        // const numPages = $(container).find('.screen :not(.empty-screen)').length;
+        //
+        // //get the number of pages on the next content row
+        // container = $(pObject.element).closest('.content-row');
+        // const numNextPages = $(container).find('.screen :not(.empty-screen)').length;
 
-        //get the number of pages on the next content row
-        container = $(pObject.element).closest('.content-row');
-        const numNextPages = $(container).find('.screen :not(.empty-screen)').length;
-
-        this.scrollToPos({duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion});
+        // this.scrollToPos({duration: animationTime, left: left, top: top, verticalFirst: numPages <= numNextPages, callback: completion});
+        this.scrollToPos({duration: animationTime, left: left, top: top, callback: completion});
     }
 
-    scrollToPos(pObject = {duration: 0, left:0, right:0, verticalFirst: true, callback: ()=>{}}){
+    scrollToPos(pObject = {duration: 0, left:0, top:0, callback: ()=>{}}){
         const windowTop = $(window).scrollTop();
         const windowLeft = $(window).scrollLeft();
         const topChange = windowTop !== pObject.top;
         const leftChange = windowLeft !== pObject.left;
-        const scroller = '#content, body';
 
-        //if our current position is diagonal from the destination
-        //  we want the animation to still be the same length (even though there are two animations)
-        //  so we cut the animation time for both animations in half
-        if(topChange && leftChange){
-            pObject.duration = pObject.duration/2;
-        }
-
-        if(pObject.verticalFirst){
-            $(scroller).animate({
-                scrollTop: pObject.top
-            }, topChange ? pObject.duration : 0, function(){
-                $(scroller).animate({
-                    scrollLeft: pObject.left
-                }, leftChange ? pObject.duration : 0, function(){
-                    if(typeof pObject.callback === 'function'){
-                        pObject.callback();
-                    }
-                });
-            });
-        }else{
-            $(scroller).animate({
-                scrollLeft: pObject.left
-            }, leftChange ? pObject.duration : 0, function(){
-                $(scroller).animate({
-                    scrollTop: pObject.top
-                }, topChange ? pObject.duration : 0, function(){
-                    if(typeof pObject.callback === 'function'){
-                        pObject.callback();
-                    }
-                });
-            });
-        }
+        $('#viewport-content').addClass('content-scaled');
+        $(this.navButtonContainers).addClass('hidden');
+        setTimeout(()=>{
+            $('#viewport-content').removeClass('content-scaled');
+            $(this.navButtonContainers).removeClass('hidden');
+        },700);
+        $('#content').css({'margin-top': -pObject.top + 'px','margin-left':-pObject.left+'px'});
+        setTimeout(pObject.callback, 1000);
     }
 
     checkScreenGridOutOfBounds(coord = {row: 0, col: 0}){
@@ -239,8 +214,10 @@ class NavBar{
         if (event.target.hash !== "") {
             // Prevent default anchor click behavior
             event.preventDefault();
+            history.pushState(null, null, event.target.hash);
+            this.setCurrentPage();
             // Move that page into view
-            this.moveElementIntoView({element: event.target.hash, animated: true});
+            // this.moveElementIntoView({element: event.target.hash, animated: true});
         }
     }
 }

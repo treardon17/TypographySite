@@ -139,8 +139,11 @@ var NavBar = function () {
             $(this.navButtonContainers).addClass('hidden');
             setTimeout(function () {
                 $('#viewport-content').removeClass('content-scaled');
+            }, 500);
+            setTimeout(function () {
                 $(_this3.navButtonContainers).removeClass('hidden');
-            }, 700);
+            }, 600);
+
             $('#content').css({ 'margin-top': -pObject.top + 'px', 'margin-left': -pObject.left + 'px' });
             setTimeout(pObject.callback, 1000);
         }

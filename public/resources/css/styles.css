@@ -166,16 +166,6 @@ html, body {
   padding: 0;
   background-color: #322F31; }
 
-.vignette {
-  -webkit-box-shadow: inset 0 0 10em black;
-  box-shadow: inset 0 -0 10em black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: ""; }
-
 #viewport {
   width: 100vw;
   height: 100vh;

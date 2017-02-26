@@ -110,8 +110,11 @@ class NavBar{
         $(this.navButtonContainers).addClass('hidden');
         setTimeout(()=>{
             $('#viewport-content').removeClass('content-scaled');
+        },500);
+        setTimeout(()=>{
             $(this.navButtonContainers).removeClass('hidden');
-        },700);
+        },600);
+
         $('#content').css({'margin-top': -pObject.top + 'px','margin-left':-pObject.left+'px'});
         setTimeout(pObject.callback, 1000);
     }

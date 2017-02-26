@@ -1,8 +1,8 @@
-#contact {
-  background-color: red; }
-
 #about {
   background-color: green; }
+
+#contact {
+  background-color: red; }
 
 .contact-form {
   height: 100vh;
@@ -53,7 +53,8 @@
       .contact-form .contact-form-content .contact-form-form .fancy-text-box, .contact-form .contact-form-content .contact-form-form .contact-form-message, .contact-form .contact-form-content .contact-form-form .contact-form-submit {
         width: 100%;
         height: 2em;
-        margin-bottom: 0.5em; }
+        margin-bottom: 0.5em;
+        font-size: 16pt; }
 
 #examples {
   background-color: blue; }
@@ -70,7 +71,8 @@
           border-radius: 5px;
   border: none;
   outline: none;
-  resize: none; }
+  resize: none;
+  font-size: 16pt; }
 
 .fancy-text-box {
   font-family: "Open Sans", sans-serif;
@@ -122,13 +124,6 @@
     background-color: black;
     color: white; }
 
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100; }
-
 .home-background-image, #home .home-background-content .home-background, #home .home-background-content .home-foreground {
   position: absolute;
   top: 0;
@@ -178,6 +173,13 @@ header {
       font-family: "CanterBoldStrips", sans-serif; }
     #home .home-content-container .home-title-2 {
       font-family: "CanterBold", sans-serif; }
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; }
 
 .nav-bar {
   position: fixed;

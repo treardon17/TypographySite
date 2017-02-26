@@ -26,7 +26,7 @@ html, body{
         transition: 1s ease-in-out;
 
         &.content-scaled{
-            transform: scale(0.5);
+            transform: scale(0.5) rotateZ(30deg) rotateX(-50deg) rotateY(-15deg);
         }
     }
 }

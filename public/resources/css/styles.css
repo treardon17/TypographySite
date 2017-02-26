@@ -55,6 +55,9 @@
         height: 2em;
         margin-bottom: 0.5em; }
 
+#examples {
+  background-color: blue; }
+
 .fancy-text-area .fancy-text-area-input {
   width: 100%;
   height: 15em;
@@ -68,9 +71,6 @@
   border: none;
   outline: none;
   resize: none; }
-
-#examples {
-  background-color: blue; }
 
 .fancy-text-box {
   font-family: "Open Sans", sans-serif;
@@ -122,13 +122,6 @@
     background-color: black;
     color: white; }
 
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100; }
-
 .home-background-image, #home .home-background-content .home-background, #home .home-background-content .home-foreground {
   position: absolute;
   top: 0;
@@ -178,6 +171,13 @@ header {
       font-family: "CanterBoldStrips", sans-serif; }
     #home .home-content-container .home-title-2 {
       font-family: "CanterBold", sans-serif; }
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; }
 
 .nav-bar {
   position: fixed;
@@ -299,9 +299,8 @@ html, body {
     -webkit-transition: 1s ease-in-out;
     transition: 1s ease-in-out; }
     #viewport #viewport-content.content-scaled {
-      -webkit-transform: scale(0.5);
-          -ms-transform: scale(0.5);
-              transform: scale(0.5); }
+      -webkit-transform: scale(0.5) rotateZ(30deg) rotateX(-50deg) rotateY(-15deg);
+              transform: scale(0.5) rotateZ(30deg) rotateX(-50deg) rotateY(-15deg); }
 
 #content {
   position: relative;

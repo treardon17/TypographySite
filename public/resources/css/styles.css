@@ -122,6 +122,13 @@
     background-color: black;
     color: white; }
 
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; }
+
 .home-background-image, #home .home-background-content .home-background, #home .home-background-content .home-foreground {
   position: absolute;
   top: 0;
@@ -171,13 +178,6 @@
       font-family: "CanterBoldStrips", sans-serif; }
     #home .home-content-container .home-title-2 {
       font-family: "CanterBold", sans-serif; }
-
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100; }
 
 .nav-bar {
   position: fixed;
@@ -299,8 +299,9 @@ html, body {
     -webkit-transition: 1s ease-in-out;
     transition: 1s ease-in-out; }
     #viewport #viewport-content.content-scaled {
-      -webkit-transform: scale(0.5) rotateZ(30deg) rotateX(-50deg) rotateY(-15deg);
-              transform: scale(0.5) rotateZ(30deg) rotateX(-50deg) rotateY(-15deg); }
+      -webkit-transform: scale(0.5);
+          -ms-transform: scale(0.5);
+              transform: scale(0.5); }
 
 #content {
   position: relative;

@@ -124,6 +124,13 @@
     background-color: black;
     color: white; }
 
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; }
+
 .home-background-image, #home .home-background-content .home-background, #home .home-background-content .home-foreground {
   position: absolute;
   top: 0;
@@ -173,13 +180,6 @@
       font-family: "CanterBoldStrips", sans-serif; }
     #home .home-content-container .home-title-2 {
       font-family: "CanterBold", sans-serif; }
-
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100; }
 
 .nav-bar {
   position: fixed;

@@ -4,15 +4,17 @@
 .contact-form{
   height: 100vh;
   display: flex;
+  overflow: hidden;
+  position: relative;
 
     .contact-form-background{
         filter: brightness(0.5);
         position: absolute;
         top: 0; bottom: 0; left: 0; right: 0;
-        background-image: url('../../resources/images/gc-blue-river.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+        background-image: url('../../resources/images/water.JPG');
     }
 
     .contact-form-title{
@@ -26,22 +28,29 @@
     .contact-form-content{
         flex: 11;
         height: 100%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-content: center;
 
         >*{
             opacity: 0.5;
         }
 
         .contact-form-form{
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 2000;
             position: relative;
-            display: inline-block;
-            top: 50%;
-            width: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+            width: 80%;
+            height: 80%;
             min-width: 350px;
-            transform: translateY(-50%);
 
             .fancy-text-box, .contact-form-message, .contact-form-submit{
+                flex-shrink: 0;
                 width: 100%;
                 height: 2em;
                 margin-bottom: 0.5em;

@@ -6,5 +6,11 @@
                "url":""
            }
        ]
+   },
+   "about":{
+       "title": "canter",
+       "paragraphs":[
+           "Today's font choice is from Brooklyn based graphic designer Christopher J Lee. Canter is an all caps, condensed typeface available in five different weights, designed as a display type for titles, headlines, and posters.  Lee says, \"This was my first attempt using FontLab Studio, so please bear with me! All of the Canter weights are ready for download, just ask if you want a copy.\" If this is what he can create for his first attempt, we can't wait to see what he comes up with next."
+       ]
    }
 }

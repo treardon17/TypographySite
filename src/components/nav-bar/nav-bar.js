@@ -28,6 +28,10 @@ class NavBar{
             this.handleNavigate(event);
         });
 
+        $(window).resize(()=>{
+            this.setCurrentPage({animated: false});
+        });
+
         window.onpopstate = ()=>{
             this.setCurrentPage({animated: true});
         };

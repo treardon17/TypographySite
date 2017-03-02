@@ -1,1 +1,10 @@
+include ../../components/splash/splash.pug
+
 div(id="about" class="screen" name="#about" title="About")
+    div(class="about-content parallax-container")
+        +splash('./resources/images/sunset.JPG')
+        div(class="about-text-container")
+            h1(class="title-heading") #{about.title}
+            div(class="paragraph-content")
+                for paragraph in about.paragraphs
+                    p #{paragraph}

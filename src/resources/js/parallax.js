@@ -11,6 +11,20 @@ class ParallaxPage{
         //set initial position of elements
         this.handleScroll();
         this.currentScrollDirection = 0;
+
+        this.setupHandlers();
+    }
+
+    setupHandlers(){
+        var throttledUpdate = _.throttle(()=>{
+            this.handleScroll();
+        }, 10)
+
+        for(let i = 0; i < this.parallaxContainers.length; i++){
+            $(this.parallaxContainers[i].container).scroll(()=>{
+                throttledUpdate();
+            });
+        }
     }
 
     //This should be placed inside of a $(window).scroll(()=>{})
@@ -44,10 +58,11 @@ class ParallaxPage{
 
     //Checks to see if an element is above, within, or below the current scroll offset
     checkElementInView(elementSelector, cbObject){
-        const top  = window.pageYOffset || document.documentElement.scrollTop;    //top of the window
+        const top  = $(elementSelector).position().top;
+        console.log(top);
         const windowHeight = $(window).height();
         const bottom = top + windowHeight;                                        //bottom of the window
-        
+
 
         const element = $(elementSelector);       //div being observed
         const height = $(element).outerHeight();  //height of the element
@@ -59,7 +74,7 @@ class ParallaxPage{
         const belowView = (top > offset + height);
         const viewInViewport = (bottom > offset || top < offset + height);
 
-        //this will prevent the new top from being set 
+        //this will prevent the new top from being set
         if(top % 2 == 0){
             //will be -1 if scrolling down, 1 if scrolling up
             if(this.previousTop < top){
@@ -105,15 +120,9 @@ class ParallaxPage{
     }
 }
 
+let parallax = null;
 //when the document has been loaded, make a parallax page
 //call the handleScroll function on every scroll event
 $(document).ready(()=>{
-    let parallax = new ParallaxPage();
-    var throttledUpdate = _.throttle(()=>{
-        parallax.handleScroll();
-    }, 10)
-
-    $(window).scroll(()=>{ 
-        throttledUpdate();
-    });
+    parallax = new ParallaxPage();
 });

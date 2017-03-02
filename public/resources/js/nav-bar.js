@@ -43,6 +43,10 @@ var NavBar = function () {
                 _this.handleNavigate(event);
             });
 
+            $(window).resize(function () {
+                _this.setCurrentPage({ animated: false });
+            });
+
             window.onpopstate = function () {
                 _this.setCurrentPage({ animated: true });
             };

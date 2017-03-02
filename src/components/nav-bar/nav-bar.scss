@@ -30,6 +30,7 @@ $nav-hidden-margin: -100%;
                 text-decoration: none;
                 text-transform: lowercase;
                 position: absolute;
+                z-index: 10000;
             }
 
             &.nav-item-container-left{

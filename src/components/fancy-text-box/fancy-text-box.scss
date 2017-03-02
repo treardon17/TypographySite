@@ -1,7 +1,8 @@
 @import "../../resources/sass/_fonts.scss";
 
 .fancy-text-box{
-    font-family: $open-sans;
+    font-family: $canter-light;
+    letter-spacing: 0.2em;
     position: relative;
     min-height: 3em;
     min-width: 5em;
@@ -46,6 +47,8 @@
             vertical-align: bottom;
             background-color: black;
             color: white;
+            font-family: $open-sans;
+            letter-spacing: 0.1em;
         }
     }
 }

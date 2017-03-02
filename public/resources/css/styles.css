@@ -1,15 +1,40 @@
 #about {
-  background-color: green; }
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  #about h1 {
+    margin: 0; }
+  #about .about-content {
+    z-index: 2000;
+    margin-top: 10%;
+    height: 90%;
+    width: 80%;
+    overflow-y: scroll; }
+    #about .about-content .splash {
+      height: 50%; }
+    #about .about-content .about-text-container {
+      width: 100%;
+      height: 100em; }
+      #about .about-content .about-text-container .title-heading, #about .about-content .about-text-container .paragraph-content > p {
+        color: white; }
+      #about .about-content .about-text-container .paragraph-content {
+        text-align: left; }
 
-#contact {
-  background-color: red; }
 
 .contact-form {
   height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  overflow: hidden;
+  position: relative; }
   .contact-form .contact-form-background {
     -webkit-filter: brightness(0.5);
             filter: brightness(0.5);
@@ -18,10 +43,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-image: url("../../resources/images/gc-blue-river.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center; }
+    background-position: center center;
+    background-image: url("../../resources/images/water.JPG"); }
   .contact-form .contact-form-title {
     display: inline-block;
     -webkit-box-flex: 1;
@@ -37,45 +62,74 @@
         -ms-flex: 11;
             flex: 11;
     height: 100%;
-    text-align: center; }
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+            align-content: center; }
     .contact-form .contact-form-content > * {
       opacity: 0.5; }
     .contact-form .contact-form-content .contact-form-form {
-      z-index: 2000;
-      position: relative;
-      display: inline-block;
       top: 50%;
-      width: 50%;
-      min-width: 350px;
       -webkit-transform: translateY(-50%);
           -ms-transform: translateY(-50%);
-              transform: translateY(-50%); }
+              transform: translateY(-50%);
+      z-index: 2000;
+      position: relative;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-align-content: center;
+          -ms-flex-line-pack: center;
+              align-content: center;
+      -webkit-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+      width: 80%;
+      height: 80%;
+      min-width: 350px; }
       .contact-form .contact-form-content .contact-form-form .fancy-text-box, .contact-form .contact-form-content .contact-form-form .contact-form-message, .contact-form .contact-form-content .contact-form-form .contact-form-submit {
+        -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+                flex-shrink: 0;
         width: 100%;
         height: 2em;
         margin-bottom: 0.5em;
         font-size: 16pt; }
 
-#examples {
-  background-color: blue; }
 
-.fancy-text-area .fancy-text-area-input {
-  width: 100%;
-  height: 15em;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  background-color: black;
-  color: white;
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
-  border: none;
-  outline: none;
-  resize: none;
-  font-size: 16pt; }
+.fancy-text-area {
+  position: relative;
+  width: 100%; }
+  .fancy-text-area .fancy-text-area-input {
+    width: 100%;
+    height: 15em;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    background-color: black;
+    color: white;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 16pt; }
 
 .fancy-text-box {
-  font-family: "Open Sans", sans-serif;
+  font-family: "CanterLight", sans-serif;
+  letter-spacing: 0.2em;
   position: relative;
   min-height: 3em;
   min-width: 5em;
@@ -122,7 +176,9 @@
     font-size: 1.5em;
     vertical-align: bottom;
     background-color: black;
-    color: white; }
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 0.1em; }
 
 header {
   position: fixed;
@@ -173,7 +229,6 @@ header {
     background-image: url(../images/ocean-foreground.gif);
     z-index: 10; }
   #home .home-content-container {
-    position: relative;
     height: 100%;
     width: 100%; }
     #home .home-content-container .home-title-1 {
@@ -227,7 +282,8 @@ header {
         letter-spacing: 0.3em;
         text-decoration: none;
         text-transform: lowercase;
-        position: absolute; }
+        position: absolute;
+        z-index: 10000; }
       .nav-bar .nav-bar-content .nav-item-container.nav-item-container-left {
         -webkit-transform: rotate(-90deg);
             -ms-transform: rotate(-90deg);
@@ -255,10 +311,18 @@ header {
         .nav-bar .nav-bar-content .nav-item-container.nav-item-container-bottom.hidden {
           bottom: -100%; }
 
+.splash {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden; }
+  .splash .splash-image {
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%; }
+
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400");
-@import url("https://fonts.googleapis.com/css?family=Caesar+Dressing");
-@import url("https://fonts.googleapis.com/css?family=Allerta+Stencil");
-@import url("https://fonts.googleapis.com/css?family=Plaster");
 @font-face {
   font-family: CanterBold;
   src: url("../fonts/CanterBold.otf") format("opentype"); }
@@ -343,7 +407,11 @@ html, body {
   height: 100vh;
   max-width: 100vw; }
 
-.random {
-  position: relative;
-  width: 100%;
-  height: 500em; }
+.title-heading {
+  font-family: "CanterBoldStrips", sans-serif;
+  opacity: 0.7;
+  letter-spacing: 0.3em;
+  font-size: 7em; }
+
+.paragraph-content {
+  font-family: "Open Sans", sans-serif; }

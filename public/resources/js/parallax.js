@@ -19,29 +19,46 @@ var ParallaxPage = function () {
         //set initial position of elements
         this.handleScroll();
         this.currentScrollDirection = 0;
+
+        this.setupHandlers();
     }
 
-    //This should be placed inside of a $(window).scroll(()=>{})
-
-
     _createClass(ParallaxPage, [{
+        key: 'setupHandlers',
+        value: function setupHandlers() {
+            var _this = this;
+
+            var throttledUpdate = _.throttle(function () {
+                _this.handleScroll();
+            }, 10);
+
+            for (var i = 0; i < this.parallaxContainers.length; i++) {
+                $(this.parallaxContainers[i].container).scroll(function () {
+                    throttledUpdate();
+                });
+            }
+        }
+
+        //This should be placed inside of a $(window).scroll(()=>{})
+
+    }, {
         key: 'handleScroll',
         value: function handleScroll() {
-            var _this = this;
+            var _this2 = this;
 
             if (this.parallaxContainers.length == 0) {
                 return;
             };
 
             var _loop = function _loop(i) {
-                var container = _this.parallaxContainers[i].container;
-                var elements = _this.parallaxContainers[i].elements;
+                var container = _this2.parallaxContainers[i].container;
+                var elements = _this2.parallaxContainers[i].elements;
 
                 //check if the element we're observing is in the current viewport
-                _this.checkElementInView(container, {
+                _this2.checkElementInView(container, {
                     elementInViewCallback: function elementInViewCallback(percentComplete) {
                         var distanceToTravel = $(container).outerHeight() * 0.33;
-                        _this.moveElements(elements, percentComplete * distanceToTravel);
+                        _this2.moveElements(elements, percentComplete * distanceToTravel);
                     }
                 });
             };
@@ -70,7 +87,8 @@ var ParallaxPage = function () {
     }, {
         key: 'checkElementInView',
         value: function checkElementInView(elementSelector, cbObject) {
-            var top = window.pageYOffset || document.documentElement.scrollTop; //top of the window
+            var top = $(elementSelector).position().top;
+            console.log(top);
             var windowHeight = $(window).height();
             var bottom = top + windowHeight; //bottom of the window
 
@@ -85,7 +103,7 @@ var ParallaxPage = function () {
             var belowView = top > offset + height;
             var viewInViewport = bottom > offset || top < offset + height;
 
-            //this will prevent the new top from being set 
+            //this will prevent the new top from being set
             if (top % 2 == 0) {
                 //will be -1 if scrolling down, 1 if scrolling up
                 if (this.previousTop < top) {
@@ -134,17 +152,9 @@ var ParallaxPage = function () {
     return ParallaxPage;
 }();
 
+var parallax = null;
 //when the document has been loaded, make a parallax page
 //call the handleScroll function on every scroll event
-
-
 $(document).ready(function () {
-    var parallax = new ParallaxPage();
-    var throttledUpdate = _.throttle(function () {
-        parallax.handleScroll();
-    }, 10);
-
-    $(window).scroll(function () {
-        throttledUpdate();
-    });
+    parallax = new ParallaxPage();
 });

@@ -166,13 +166,19 @@ gulp.task('browser-sync-html', ['sass', 'pug', 'js', 'images', 'php-forms'], ()=
     });
 });
 
+function reloadBrowser(){
+    setTimeout(()=>{
+        browserSync.reload()
+    }, 20);
+}
+
 //Watch for changes
 gulp.task('watch',()=>{
-    gulp.watch(paths.dev.root + '**/*.scss', ['sass']).on('change', ()=>{browserSync.reload()});
-    gulp.watch(paths.dev.root + '**/*.pug', ['pug']).on('change', ()=>{browserSync.reload()});
-    gulp.watch(paths.dev.root + '**/*.js', ['js']).on('change', ()=>{browserSync.reload()});
-    gulp.watch(paths.dev.images + '**/*.[png | PNG | jpe?g | JPE?G]', ['images']).on('change', ()=>{browserSync.reload()});
-    gulp.watch(paths.build.root + '**/*.php').on('change', ()=>{browserSync.reload()});
+    gulp.watch(paths.dev.root + '**/*.scss', ['sass']).on('change', reloadBrowser);
+    gulp.watch(paths.dev.root + '**/*.pug', ['pug']).on('change', reloadBrowser);
+    gulp.watch(paths.dev.root + '**/*.js', ['js']).on('change', reloadBrowser);
+    gulp.watch(paths.dev.images + '**/*.[png | PNG | jpe?g | JPE?G]', ['images']).on('change', reloadBrowser);
+    gulp.watch(paths.build.root + '**/*.php').on('change', reloadBrowser);
 });
 
 //Build and compile everything

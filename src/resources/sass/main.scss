@@ -59,4 +59,8 @@ html, body{
 
 .paragraph-content{
     font-family: $open-sans;
+
+    p{
+        line-height: 2em;
+    }
 }

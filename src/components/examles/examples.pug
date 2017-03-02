@@ -1,4 +1,12 @@
 include ../../components/splash/splash.pug
+include ../../util/include/include-script.pug
 
++include-script('./resources/js/examples.js')
 div(id="examples" class="screen" name="#examples" title="Examples")
-    
+    div(class="example-content")
+        div(class="example-heading-group")
+            -for(var i = 0; i < 400; i++)
+                for font in examples.fonts
+                    h1(class="example-heading " + font) A
+        div(class="example-text-writer-container")
+            h(id="example-text-writer" class="title-heading") hello there

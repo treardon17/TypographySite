@@ -88,10 +88,8 @@ var ParallaxPage = function () {
         key: 'checkElementInView',
         value: function checkElementInView(elementSelector, cbObject) {
             var top = $(elementSelector).position().top;
-            console.log(top);
             var windowHeight = $(window).height();
             var bottom = top + windowHeight; //bottom of the window
-
 
             var element = $(elementSelector); //div being observed
             var height = $(element).outerHeight(); //height of the element

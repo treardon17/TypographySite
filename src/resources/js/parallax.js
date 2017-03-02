@@ -59,10 +59,8 @@ class ParallaxPage{
     //Checks to see if an element is above, within, or below the current scroll offset
     checkElementInView(elementSelector, cbObject){
         const top  = $(elementSelector).position().top;
-        console.log(top);
         const windowHeight = $(window).height();
         const bottom = top + windowHeight;                                        //bottom of the window
-
 
         const element = $(elementSelector);       //div being observed
         const height = $(element).outerHeight();  //height of the element

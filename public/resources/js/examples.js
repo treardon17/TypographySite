@@ -8,19 +8,24 @@ var ExampleWriter = function () {
     function ExampleWriter() {
         _classCallCheck(this, ExampleWriter);
 
-        this.wordArray = ['welcome', 'to', 'cantor'];
+        // this.wordArray = ['welcome', 'to', 'cantor'];
         this.writeToScreen();
     }
 
     _createClass(ExampleWriter, [{
         key: 'writeToScreen',
         value: function writeToScreen() {
-            this.writeAndRemoveWordArray({ array: this.wordArray, timeBetweenWords: 1000, timeBetweenLetters: 300, callback: this.writeToScreen });
+            var _this = this;
+
+            this.writeAndRemoveWordArray({ array: ['welcome', 'to', 'cantor'], timeBetweenWords: 1000, timeBetweenLetters: 300, callback: function callback() {
+                    _this.writeToScreen();
+                }
+            });
         }
     }, {
         key: 'writeAndRemoveWordArray',
         value: function writeAndRemoveWordArray() {
-            var _this = this;
+            var _this2 = this;
 
             var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { array: [], timeBetweenWords: 0, timeBetweenLetters: 0, callback: function callback() {} };
 
@@ -33,19 +38,19 @@ var ExampleWriter = function () {
 
             this.writeAndRemoveWord({ word: pObject.array[0], timeBetweenLetters: pObject.timeBetweenLetters, timeBetweenWords: pObject.timeBetweenWords, callback: function callback() {
                     var slicedArray = pObject.array.slice(1, pObject.array.length);
-                    _this.writeAndRemoveWordArray({ array: slicedArray, timeBetweenWords: pObject.timeBetweenWords, timeBetweenLetters: pObject.timeBetweenLetters });
+                    _this2.writeAndRemoveWordArray({ array: slicedArray, timeBetweenWords: pObject.timeBetweenWords, timeBetweenLetters: pObject.timeBetweenLetters, callback: pObject.callback });
                 } });
         }
     }, {
         key: 'writeAndRemoveWord',
         value: function writeAndRemoveWord() {
-            var _this2 = this;
+            var _this3 = this;
 
             var pObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { word: '', timeBetweenLetters: 0, timeBetweenWords: 0, callback: function callback() {} };
 
             this.writeWordToElement({ element: '#example-text-writer', word: pObject.word, timeBetween: pObject.timeBetweenLetters * (2 / 3), callback: function callback() {
                     setTimeout(function () {
-                        _this2.removeWordFromElement({ element: '#example-text-writer', timeBetween: pObject.timeBetweenLetters * (1 / 3), callback: pObject.callback });
+                        _this3.removeWordFromElement({ element: '#example-text-writer', timeBetween: pObject.timeBetweenLetters * (1 / 3), callback: pObject.callback });
                     }, pObject.timeBetweenWords);
                 } });
         }

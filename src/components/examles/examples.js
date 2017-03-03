@@ -1,11 +1,14 @@
 class ExampleWriter{
     constructor(){
-        this.wordArray = ['welcome', 'to', 'cantor'];
+        // this.wordArray = ['welcome', 'to', 'cantor'];
         this.writeToScreen()
     }
 
     writeToScreen(){
-        this.writeAndRemoveWordArray({array: this.wordArray, timeBetweenWords: 1000, timeBetweenLetters: 300, callback: this.writeToScreen});
+        this.writeAndRemoveWordArray({array: ['welcome', 'to', 'cantor'], timeBetweenWords: 1000, timeBetweenLetters: 300, callback:()=>{
+            this.writeToScreen();
+            }
+        });
     }
 
     writeAndRemoveWordArray(pObject = {array: [], timeBetweenWords: 0, timeBetweenLetters: 0, callback: ()=>{}}){
@@ -18,7 +21,7 @@ class ExampleWriter{
 
         this.writeAndRemoveWord({word: pObject.array[0], timeBetweenLetters: pObject.timeBetweenLetters, timeBetweenWords: pObject.timeBetweenWords, callback: ()=>{
             let slicedArray = pObject.array.slice(1, pObject.array.length);
-            this.writeAndRemoveWordArray({array: slicedArray, timeBetweenWords: pObject.timeBetweenWords, timeBetweenLetters: pObject.timeBetweenLetters})
+            this.writeAndRemoveWordArray({array: slicedArray, timeBetweenWords: pObject.timeBetweenWords, timeBetweenLetters: pObject.timeBetweenLetters, callback: pObject.callback})
         }});
     }
 
